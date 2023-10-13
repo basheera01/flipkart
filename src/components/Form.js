@@ -66,7 +66,7 @@ const handleEdit=(ed)=>{
 }
    console.log(products)
    const handleDelete=(id)=>{
-     axios.delete(`http://localhost:3002/products/${id}`,productData)
+     axios.delete(`http://localhost:3002/products/${id}`)
      .then((res)=>{
          alert('Product Deleted');
          fetchData()

@@ -1,3 +1,49 @@
 {
-  "products": []
+  "products": [
+    {
+      "productId": "a1b2c3",
+      "title": "vivo v25",
+      "brand": "vivo",
+      "price": "25000",
+      "description": "8 gb ram, compatible to new technologies",
+      "thumbnail": "https://tse3.mm.bing.net/th?id=OIP.6S8Vm-EuTZoTCDTSRMqWhAHaE8&pid=Api&P=0&h=180",
+      "id": 1
+    },
+    {
+      "productId": "a1111",
+      "title": "titan watch",
+      "brand": "titan",
+      "price": "5999",
+      "description": "water proof, smudge proof",
+      "thumbnail": "https://staticimg.titan.co.in/Titan/Catalog/1829NM02_1.jpg?impolicy=pqmed&imwidth=640",
+      "id": 2
+    },
+ {
+      "productId": "123456",
+      "title": "rose",
+      "brand": "flower",
+      "price": "22212",
+      "description": "roses",
+      "thumbnail": "https://tse3.mm.bing.net/th?id=OIP.plLZe_-yeZHULAHee4M_7AHaEK&pid=Api&P=0&h=180",
+      "id": 3
+    },
+ {
+      "productId": "123456",
+      "title": "macbook pro",
+      "brand": "macbook",
+      "price": "169999",
+      "description": "16 gb ram, touch screen",
+      "thumbnail": "https://tse4.mm.bing.net/th?id=OIP.OS6ieoRmA8sOpxg9BNfMwAHaJ4&pid=Api&P=0&h=180",
+      "id": 4
+    },
+{
+      "productId": "12aabb",
+      "title": "pattu saree",
+      "brand": "banjaras",
+      "price": "3999",
+      "description": "colorful",
+      "thumbnail": "https://tse4.mm.bing.net/th?id=OIP.9gxk_D7JwiOsfyiUjOX1gAHaJ4&pid=Api&P=0&h=180",
+      "id": 5
+    }
+  ]
 }
