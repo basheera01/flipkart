@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React from 'react'
-import fetchData from "./Products2"
 import { useState ,useEffect} from 'react'
 export default function Form() {
  const [id,setId]=useState('')
@@ -9,6 +8,7 @@ export default function Form() {
  const [des,setDes]=useState('')
  const [img,setImg]=useState('')
  const [title,setTitle]=useState('')
+ const[pid,setPid]=useState('');
  const productData={
     productId:id,
     title:title,
@@ -18,76 +18,67 @@ export default function Form() {
     thumbnail:img
  }
  const handleSubmit=(e)=>{
-    e.preventDefault();
-    axios.post('http://localhost:3002/products',productData)
-    .then((res)=>{alert("Success")})
-    fetchData()
-    setId('')
-    setPrice('')
-    setTitle('')
-    setBrand('')
-    setDes('')
-    setImg('')
- }
+  e.preventDefault();
+  if(pid==""){
+  axios.post('http://localhost:3002/products',productData)
+  .then((res)=>{
+      alert('success')
+      fetchData()
+      setId('')
+      setTitle('')
+      setBrand('')
+      setDes('')
+      setImg('')
+      setPrice('')
+  })
+}
+else{
+  axios.put(`http://localhost:3002/products/${pid}`,productData)
+  .then((res)=>{
+      alert('success')
+      fetchData()
+      setId('')
+      setTitle('')
+      setBrand('')
+      setDes('')
+      setImg('')
+      setPrice('')
+  })
+}
+}
+const handleEdit=(ed)=>{
+  const {id,title,brand,price,des,img}=ed
+  alert(title)
+  setId(ed.productId);
+  setTitle(ed.title);
+  setBrand(ed.brand);
+  setPrice(ed.price);
+  setDes(ed.description);
+  setImg(ed.thumbnail);
+  setPid(ed.id);
+  fetchData();
+}
  let sno=1;
  const [products,setProducts]=useState([{}])
-   useEffect(()=>{
-       axios.get('http://localhost:3002/products')
-       .then(res=>setProducts(res.data))
-   },0)
+ const fetchData=()=>{
+  axios.get('http://localhost:3002/products')
+  .then((res)=>setProducts(res.data))
+}
    console.log(products)
    const handleDelete=(id)=>{
-     axios.delete(`http://localhost:3002/products/${id}`)
+     axios.delete(`http://localhost:3002/products/${id}`,productData)
      .then((res)=>{
          alert('Product Deleted');
          fetchData()
      })
   }
-  const fetchData=()=>{
-   axios.get('http://localhost:3002/products')
-   .then((res)=>setProducts(res.data))
-}
+  
 useEffect(()=>{
     fetchData()
    },0)
   return (
     <>
-    <table className='table table-bordered' style={{color:'white'}}>
-      <thead>
-        <tr>
-          <th>S.No</th>
-          <th>Product Id</th>
-          <th>Title</th>
-          <th>Brand</th>
-          <th>Price</th>
-          <th>Description</th>
-          <th>Thumbnail</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-          {
-              products.map((element,index)=>{
-                return(
-                  <tr>
-                    <td>{sno++}</td>
-                    <td>{element.productId}</td>
-                    <td>{element.title}</td>
-                    <td>{element.brand}</td>
-                    <td>{element.price}</td>
-                    <td>{element.description}</td>
-                    <td><img src={element.thumbnail} id='thumb'/></td>
-                    <td><button><i id='actions1' class="fa-solid fa-pen-to-square"></i></button>
-                         <button><i id="actions2" class="fa-solid fa-trash-can"onClick={()=>handleDelete(element.id)}></i></button></td>
-                  </tr>
-                )
-              })
-            
-          }
-      </tbody>
-    </table>
-  
-    <br />
+     <br />
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-md-4 bg-warning">
@@ -127,6 +118,41 @@ useEffect(()=>{
             </div>
         </div>
     </div>
+    <br/>
+    <table className='table table-bordered' style={{color:'white'}}>
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Product Id</th>
+          <th>Title</th>
+          <th>Brand</th>
+          <th>Price</th>
+          <th>Description</th>
+          <th>Thumbnail</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+          {
+              products.map((element,index)=>{
+                return(
+                  <tr>
+                    <td>{sno++}</td>
+                    <td>{element.productId}</td>
+                    <td>{element.title}</td>
+                    <td>{element.brand}</td>
+                    <td>{element.price}</td>
+                    <td>{element.description}</td>
+                    <td><img src={element.thumbnail} id='thumb'/></td>
+                    <td><button onClick={()=>handleEdit(element)}><i id='actions1' class="fa-solid fa-pen-to-square"></i></button>
+                         <button onClick={()=>handleDelete(element.id)}><i id="actions2" class="fa-solid fa-trash-can" ></i></button></td>
+                  </tr>
+                )
+              })
+            
+          }
+      </tbody>
+    </table>
     </>
   )
 }
