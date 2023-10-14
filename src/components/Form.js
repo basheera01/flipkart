@@ -19,7 +19,7 @@ export default function Form() {
  }
  const handleSubmit=(e)=>{
   e.preventDefault();
-  if(pid==""){
+  if(pid===""){
   axios.post('http://localhost:3002/products',productData)
   .then((res)=>{
       alert('success')
